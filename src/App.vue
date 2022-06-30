@@ -7,10 +7,10 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6">
-            Application
+            Todo App
           </v-list-item-title>
           <v-list-item-subtitle>
-            subtext
+            with checkboxes
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -24,6 +24,7 @@
         <v-list-item
           v-for="item in items"
           :key="item.title"
+          :to="item.to"
           link
         >
           <v-list-item-icon>
@@ -37,14 +38,42 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+      src="leafs.jpg"
+      prominent
+      @click="drawer = !drawer"
+    >
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+        ></v-img>
+      </template>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
+      <v-app-bar-title>Title</v-app-bar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
     </v-app-bar>
 
     <v-main>
-      <!--  -->
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
@@ -55,8 +84,8 @@
       { 
         drawer: null,
         items: [
-          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
-          { title: 'About', icon: 'mdi-help-box' },
+          { title: 'Todo', icon: 'mdi-list-status', to: '/' },
+          { title: 'About', icon: 'mdi-information-outline', to: '/about' },
         ],
       }
     ),
